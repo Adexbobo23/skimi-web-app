@@ -19,12 +19,14 @@ class ChatConsumer(WebsocketConsumer):
         )
 
         self.accept()
+        print(f"WebSocket connected for room {self.room_name}")
 
     def disconnect(self, close_code):
         async_to_sync(self.channel_layer.group_discard)(
             self.room_group_name,
             self.channel_name
         )
+        print(f"WebSocket disconnected for room {self.room_name}")
 
     def receive(self, text_data):
         data = json.loads(text_data)
@@ -45,6 +47,7 @@ class ChatConsumer(WebsocketConsumer):
             message=message,
         )
         chat_message.save()
+        print(f"Received WebSocket data: {text_data}")
 
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,

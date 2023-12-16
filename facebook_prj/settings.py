@@ -50,10 +50,12 @@ INSTALLED_APPS = [
     'core',
     'userauths',
     'addon',
+    'status',
 
     # THird Party Apps
     'mathfilters',
-    'channels'
+    'channels',
+    "widget_tweaks",
 
 ]
 
@@ -162,11 +164,11 @@ LOGOUT_REDIRECT_URL = "userauths:sign-up"
 
 
 JAZZMIN_SETTINGS = {
-    'site_header': "Facebook Clone",
+    'site_header': "Skimi Social Media",
     'site_brand': "Connecting people together...",
-    'site_logo': "images/logo.png",
+    'site_logo': "images/skimi_logo.png",
     'copyright':  "All Right Reserved 2023",
-    "welcome_sign": "Welcome to Facebook Clone, Login Now.",
+    "welcome_sign": "Welcome to Skimi, Login Now.",
     "topmenu_links": [
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
         {"name": "Company", "url": "/admin/addons/company/"},

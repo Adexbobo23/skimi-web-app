@@ -20,6 +20,19 @@ urlpatterns = [
     path("core/join-group/<slug:slug>/", views.join_group_chat, name="join_group"),
     path("core/leave-group/<slug:slug>/", views.leave_group_chat, name="leave_group_chat"),
 
+    # Games
+    path("core/all-games/", views.games, name="games"),
+    path("core/stack_brick/", views.stack_brick, name="stack_brick"),
+
+    # Search
+    path('search/', views.search_users, name='search_users'),
+
+    # Load more post
+    path('load_more_posts/', views.load_more_posts, name='load_more_posts'),
+
+
+
+
     # Ajax URLs
     path("create-post/", views.create_post, name="create-post"),
     path("like-post/", views.like_post, name="like-post"),

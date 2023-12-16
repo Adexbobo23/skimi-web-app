@@ -6,10 +6,11 @@ from django.utils.timesince import timesince
 from django.utils.text import slugify
 from django.db.models import OuterRef, Subquery
 from django.db.models import Q, Count, Sum, F, FloatField
-
+from django.core.paginator import Paginator
 
 from core.models import Post, Friend, FriendRequest, Notification, Comment, ReplyComment, ChatMessage, GroupChatMessage, GroupChat
 from userauths.models import User, Profile, user_directory_path
+from status.models import StatusUpdate
 
 
 import shortuuid
@@ -26,8 +27,14 @@ noti_friend_request_accepted = "Friend Request Accepted"
 @login_required
 def index(request):
     posts = Post.objects.filter(active=True, visibility="Everyone")
+    status_updates = StatusUpdate.objects.all().order_by('-created_at')
+
+    paginator = Paginator(posts, 3)  
+    page_number = request.GET.get('page')
+    posts = paginator.get_page(page_number)
     context = {
-        "posts":posts
+        "posts":posts,
+        'status_updates': status_updates,
     }
     return render(request, "core/index.html", context)
 
@@ -452,3 +459,67 @@ def leave_group_chat(request, slug):
         return redirect("core:join_group_chat_page", groupchat.slug)
 
     return redirect("core:join_group_chat_page", groupchat.slug)
+
+
+def games(request):
+    return render(request, 'games/all_games.html')
+
+def stack_brick(request):
+    return render(request, 'games/stack_brick.html')
+
+
+def search_users(request):
+    query = request.GET.get('q')
+    if query:
+        users = User.objects.filter(username__icontains=query) | User.objects.filter(email__icontains=query) | User.objects.filter(full_name__icontains=query)
+
+        users_data = []
+        for user in users:
+            try:
+                profile = Profile.objects.get(user=user)
+                profile_image = profile.image.url
+                full_name = profile.full_name
+            except Profile.DoesNotExist:
+                profile_image = None
+                full_name = None
+
+            user_data = {
+                'username': user.username,
+                'full_name': full_name,
+                'email': user.email,
+                'profile_image': profile_image,
+            }
+            users_data.append(user_data)
+    else:
+        users_data = []
+    return JsonResponse({'users': users_data})
+
+
+
+
+def load_more_posts(request):
+    all_posts = Post.objects.filter(active=True, visibility="Everyone").order_by('-date')
+
+    # Paginate the posts
+    paginator = Paginator(all_posts, 3)  
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    posts_data = []
+    for post in page_obj:
+        post_data = {
+            'title': post.title,
+            'profile_image': post.user.profile.image.url,
+            'full_name': post.user.profile.full_name,
+            'image_url': post.image.url if post.image else None,
+            'video': post.video.url if post.video else None,
+            'id': post.id,
+            'id': post.id,
+            'likes': post.likes.count(),
+            'slug': post.slug,
+            'views': post.views,
+            'date': timesince(post.date),
+        }
+        posts_data.append(post_data)
+
+    return JsonResponse({'posts': posts_data})
