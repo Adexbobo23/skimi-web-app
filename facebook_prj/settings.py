@@ -42,6 +42,9 @@ ASGI_APPLICATION = 'facebook_prj.asgi.application'
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        'CONFIG': {
+            "hosts": ['localhost', 'skimi.net'],
+        },
     },
 }
 
