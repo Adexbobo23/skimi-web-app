@@ -29,9 +29,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'skimi.net', 
-    'skimi.net',
+    'www.skimi.net',
     'skimi-6cbfc2b63ece.herokuapp.com'
 ]
+
+# Django CORS
+CORS_ALLOWED_ORIGINS = [
+    'https://skimi.net',
+    'https://www.skimi.net',
+    'https://skimi-6cbfc2b63ece.herokuapp.com',
+]
+
 
 ASGI_APPLICATION = 'facebook_prj.asgi.application'
 
