@@ -27,11 +27,7 @@ SECRET_KEY = 'django-insecure-vvc&xghblt&%zr_+kmutf+b(5qs%ze5k=kw=bi)naqyw)o4w#7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'skimi.net', 
-    'www.skimi.net',
-    'skimi-6cbfc2b63ece.herokuapp.com'
-]
+ALLOWED_HOSTS = ['*']
 
 # Django CORS
 CORS_ALLOWED_ORIGINS = [
