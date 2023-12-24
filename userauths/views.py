@@ -5,12 +5,13 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-
+from django.views.decorators.csrf import csrf_protect
 from userauths.models import User, Profile
 from userauths.forms import UserRegisterForm, ProfileUpdateForm, UserUpdateForm
 from core.models import FriendRequest, Post
 
 
+@csrf_protect
 def RegisterView(request, *args, **kwargs):
     if request.user.is_authenticated:
         messages.warning(request, f"Hey {request.user.username}, you are already logged in")
@@ -39,6 +40,8 @@ def RegisterView(request, *args, **kwargs):
     context = {'form':form}
     return render(request, 'userauths/sign-up.html', context)
 
+
+@csrf_protect
 def LoginView(request):
     # if request.user.is_authenticated:
     #     return redirect('core:feed')
