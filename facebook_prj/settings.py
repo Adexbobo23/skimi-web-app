@@ -69,6 +69,9 @@ INSTALLED_APPS = [
 
 ]
 
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -258,3 +261,6 @@ JAZZMIN_UI_TWEAKS = {
     }
 }
 
+
+import django_heroku
+django_heroku.settings(locals())
