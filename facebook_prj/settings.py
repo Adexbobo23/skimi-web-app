@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
+import dj_database_url
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +29,7 @@ SECRET_KEY = 'django-insecure-vvc&xghblt&%zr_+kmutf+b(5qs%ze5k=kw=bi)naqyw)o4w#7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['*']
 
 ASGI_APPLICATION = 'facebook_prj.asgi.application'
 
@@ -248,3 +252,6 @@ JAZZMIN_UI_TWEAKS = {
     }
 }
 
+
+
+django_heroku.settings(locals())
