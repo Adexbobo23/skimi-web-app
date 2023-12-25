@@ -120,10 +120,10 @@ WSGI_APPLICATION = 'facebook_prj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'df5l8agjf4gjpj', 
-        'USER': 'wwypnbtiynhjte',
-        'PASSWORD': '1dcdb9e7bd9274e378e6ffd8f378d1c3c7399728d582c9a4f28d88c757552707',
-        'HOST': 'ec2-3-230-24-12.compute-1.amazonaws.com', 
+        'NAME': 'd1je42l1i5o2gp', 
+        'USER': 'uasvmlipqo4ecc',
+        'PASSWORD': 'pf4cd53b35bcda361cbd97d31d4538d10390c903071122bec119129c439b1c81f',
+        'HOST': 'ec2-50-19-205-13.compute-1.amazonaws.com', 
         'PORT': '5432',
     }
 }
