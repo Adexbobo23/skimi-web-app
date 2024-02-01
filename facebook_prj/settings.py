@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from google.cloud import storage
+import firebase_admin
+from firebase_admin import credentials
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -175,7 +178,20 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# Default primary key field type
+# Get the directory of the current script (settings.py)
+# current_directory = os.path.dirname(os.path.realpath(__file__))
+
+# # Construct the path to the Firebase credentials JSON file
+# json_file_path = os.path.join(current_directory, 'skimi-3e278-firebase-adminsdk-l2l8g-157721ceab.json')
+
+# # Use Google Cloud Storage for media files
+# DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+# GS_BUCKET_NAME = 'skimi-3e278.appspot.com'
+
+# # Django media settings
+# MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -186,7 +202,6 @@ AUTH_USER_MODEL = 'userauths.User'
 LOGIN_REDIRECT_URL = ''
 LOGIN_URL = 'userauths:sign-up'
 LOGOUT_REDIRECT_URL = "userauths:sign-up"
-
 
 
 
