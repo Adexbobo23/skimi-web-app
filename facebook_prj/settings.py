@@ -12,9 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-from google.cloud import storage
-import firebase_admin
-from firebase_admin import credentials
+import boto3
+from storages.backends.s3boto3 import S3Boto3Storage
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +37,21 @@ CORS_ALLOWED_ORIGINS = [
     'https://www.skimi.net',
     'https://skimi-6cbfc2b63ece.herokuapp.com',
 ]
+
+# AWS S3 settings
+AWS_ACCESS_KEY_ID = 'AKIAX7CRDYXPU5IU4MVX'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'bucketeer-4aa7f9db-d5d8-44fa-bce5-b0ea29d839d4'
+AWS_S3_REGION_NAME = 'us-east-1'
+
+# Use the default S3 domain provided by Heroku Bucketeer
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+
+# Use S3 for storage for both static and media files.
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'facebook_prj.storage_backends.MediaStorage'
 
 
 ASGI_APPLICATION = 'facebook_prj.asgi.application'
@@ -177,22 +191,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
-# Get the directory of the current script (settings.py)
-# current_directory = os.path.dirname(os.path.realpath(__file__))
-
-# # Construct the path to the Firebase credentials JSON file
-# json_file_path = os.path.join(current_directory, 'skimi-3e278-firebase-adminsdk-l2l8g-157721ceab.json')
-
-# # Use Google Cloud Storage for media files
-# DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-# GS_BUCKET_NAME = 'skimi-3e278.appspot.com'
-
-# # Django media settings
-# MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-# # Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
