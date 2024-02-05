@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    
     <style>
         .word {
            text-align: center;
@@ -38,15 +37,14 @@
     <div class="lg:flex max-w-5xl min-h-screen mx-auto p-6 py-10">
         <div class="flex flex-col items-center lg: lg:flex-row lg:space-x-10">
             <div class="lg:mb-12 flex-1 lg:text-left text-center">
-                <img src="{% static 'assets/images/secure.png' %}" alt="" >
+                <img src="{% static 'assets/images/skimi_logo.png' %}" alt="" class="lg:mx-0 lg:w-52 mx-auto w-40">
+                <p class="font-medium lg:mx-0 md:text-2xl mt-6 mx-auto sm:w-3/4 text-xl"> Connect with friends and the world around you on Skimi.</p>
             </div>
             <div class="lg:mt-0 lg:w-96 md:w-1/2 sm:w-2/3 mt-10 w-full">
-                <!-- <img src="{% static 'assets/images/skimi_logo.png' %}" class="logo_skimi"> -->
                 <p class="word"> 
                     Connect with friends and the world around you on Skimi.
                     Join a community that embraces diversity.
                 </p>
-                <p></p>
                 <!-- Form Errors -->
                 {% if form.errors %}
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -80,7 +78,6 @@
                             Create New Account
                         </a>
                     </div>
-                    <!-- <p class="font-medium lg:mx-0 md:text-2xl mt-6 mx-auto sm:w-3/4 text-xl"> Connect with friends and the world around you on Skimi.</p> -->
                 </form>
 
                 <!-- <div class="mt-8 text-center text-sm"> <a href="#" class="font-semibold hover:underline"> Create a Page </a> for a celebrity, band or business </div> -->
