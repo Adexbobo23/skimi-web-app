@@ -41,11 +41,11 @@ CORS_ALLOWED_ORIGINS = [
 
 
 
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
-AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_CUSTOM_DOMAIN', default=None)
+AWS_ACCESS_KEY_ID = 'AKIA37SVVXBHSOQCM2GY'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'cloud-cube-us2'
+AWS_S3_REGION_NAME = 'us-east-1'
+AWS_S3_CUSTOM_DOMAIN = 'cloud-cube-us2.s3.amazonaws.com/ugwwlf48fkkl'
 
 # Use S3 for storage for both static and media files.
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
