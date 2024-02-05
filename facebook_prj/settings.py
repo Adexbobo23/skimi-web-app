@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 # import boto3
 # from storages.backends.s3boto3 import S3Boto3Storage
 
@@ -38,20 +39,21 @@ CORS_ALLOWED_ORIGINS = [
     'https://skimi-6cbfc2b63ece.herokuapp.com',
 ]
 
-# # AWS S3 settings
-# AWS_ACCESS_KEY_ID = 'AKIAX7CRDYXPVBKH6IBZ'
-# AWS_SECRET_ACCESS_KEY = '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'
-# AWS_STORAGE_BUCKET_NAME = 'bucketeer-4aa7f9db-d5d8-44fa-bce5-b0ea29d839d4'
-# AWS_S3_REGION_NAME = 'us-east-1'
 
-# # Use the default S3 domain provided by Heroku Bucketeer
-# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
-# MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 
-# # Use S3 for storage for both static and media files.
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# DEFAULT_FILE_STORAGE = 'facebook_prj.storage_backends.MediaStorage'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
+AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_CUSTOM_DOMAIN', default=None)
+
+# Use S3 for storage for both static and media files.
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'facebook_prj.storage_backends.MediaStorage' 
+
+# Static and media URLs
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/' if AWS_S3_CUSTOM_DOMAIN else f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/'
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/' if AWS_S3_CUSTOM_DOMAIN else f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/media/'
 
 
 ASGI_APPLICATION = 'facebook_prj.asgi.application'
