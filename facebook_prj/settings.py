@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary_storage
 # from decouple import config
 # import boto3
 # from storages.backends.s3boto3 import S3Boto3Storage
@@ -78,6 +79,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
 
     'core',
     'userauths',
@@ -140,14 +142,19 @@ WSGI_APPLICATION = 'facebook_prj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd1je42l1i5o2gp', 
-        'USER': 'uasvmlipqo4ecc',
-        'PASSWORD': 'pf4cd53b35bcda361cbd97d31d4538d10390c903071122bec119129c439b1c81f',
-        'HOST': 'ec2-50-19-205-13.compute-1.amazonaws.com', 
+        'NAME': 'd532mt1tut73if', 
+        'USER': 'u1qfd9g8gpqpk8',
+        'PASSWORD': 'p159541c91efd6cedc31688aa092db83cbc12755f5875e47f6ce0ebd2ab7b1845',
+        'HOST': 'c7gljno857ucsl.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com', 
         'PORT': '5432',
     }
 }
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dfrmpshsi',
+    'API_KEY': '717662429698743',
+    'API_SECRET': 'KMrqgwTNhlXQQarlMfTFrSS_9nk'
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -186,14 +193,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-MEDIA_URL = '/media/'
 
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
